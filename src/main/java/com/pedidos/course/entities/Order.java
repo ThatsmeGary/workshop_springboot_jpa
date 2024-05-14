@@ -2,7 +2,6 @@ package com.pedidos.course.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 
 
@@ -23,11 +24,15 @@ public class Order implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Instant moment;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyy-MM-dd'T'HH:mm:ss'Z'")
+    private Instant moment;
+    
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+
 
     public Order() {
     }
