@@ -1,12 +1,15 @@
 package com.pedidos.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +32,11 @@ public class User implements Serializable {
 
 	@Column(name = "password", length = 60)
 	private String password;
+
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<>();
+
+	
 
 	public User() {
 	}
@@ -80,6 +88,10 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	@Override
